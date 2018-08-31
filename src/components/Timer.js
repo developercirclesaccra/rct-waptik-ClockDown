@@ -13,9 +13,10 @@ class Timer extends Component {
             status: null
         };
 
-        this.startTimer = this.startTimer.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        this.resetTimer = this.resetTimer.bind(this);
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+        this.pause = this.pause.bind(this);
+        this.reset = this.reset.bind(this);
         this.onSecondsChanged = this.onSecondsChanged.bind(this);
     }
 
@@ -35,7 +36,7 @@ class Timer extends Component {
         }
     }
 
-    startTimer() {
+    start() {
         if (this.state.status !== 'started') {
             this.interval = setInterval(() => {
                 if (this.state.time !== 0) {
@@ -51,7 +52,21 @@ class Timer extends Component {
         }
     }
 
-    stopTimer() {
+    pause() {
+        if (this.state.status && this.state.status === 'started') {
+
+            clearInterval(this.interval);
+
+            this.setState((prevState) => {
+                return ({
+                    status: 'paused',
+                    seconds: Math.floor(prevState.time / 1000)
+                });
+            });
+        }
+    }
+
+    stop() {
         if (this.state.status && this.state.status === 'started') {
 
             clearInterval(this.interval);
@@ -65,7 +80,7 @@ class Timer extends Component {
         }
     }
 
-    resetTimer() {
+    reset() {
         clearInterval(this.interval);
 
         this.setState(() => ({ seconds: 0, status: null, time: 0 }));
@@ -73,19 +88,25 @@ class Timer extends Component {
 
     render() {
         return (
-            <div>
-                <Show seconds={this.state.seconds}
-                    status={this.state.status}
-                    time={this.state.time}
-                    onSecondsChanged={this.onSecondsChanged}>
-                    <div>
-                        <Buttons startTimer={this.startTimer}
-                            stopTimer={this.stopTimer}
-                            resetTimer={this.resetTimer}
+            <div className="container">
+                <div className="card text-center text-white bg-secondary mb-3">
+                    <div class="card-header">Timer</div>
+                    <div className="card-body">
+                        <p className="card-text">
+                            <Show seconds={this.state.seconds}
+                                status={this.state.status}
+                                time={this.state.time}
+                                onSecondsChanged={this.onSecondsChanged}>
+                            </Show>
+                        </p>
+                    </div>
+                </div>
+                        <Buttons start={this.start}
+                            pause={this.pause}
+                            stop={this.stop}
+                            reset={this.reset}
                             status={this.state.status}
                             canStart={this.state.seconds > 0} />
-                    </div>
-                </Show>
             </div>
         );
     }
