@@ -1,1 +1,3 @@
-"To test:\nnpm install\nnpm start" 
+To test:
+npm install
+npm start 
