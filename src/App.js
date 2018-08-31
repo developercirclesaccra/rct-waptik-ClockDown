@@ -33,10 +33,7 @@ import { FaGithubAlt } from 'react-icons/fa';
         <p className="App-intro"></p>
                 <div className="mt-5">
                     <Timer />
-                </div>
-
-                <div><FaGithubAlt /><a href="https://github.com/developercirclesaccra/rct-waptik-ClockDown" target="_blank">repo</a></div>
-            </div>
+                </div></div>
         );
     }
 }

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+//icons
+import { FaGithubAlt } from 'react-icons/fa';
+
 const Buttons = (props) => (
             <div className="card">
                     <div class="card-header">Control buttons</div>
@@ -44,7 +47,13 @@ const Buttons = (props) => (
                             </span>
                         </div>
                     </div>
-                </div>
+
+                    <div className="card-footer text-muted">
+                    <span>Official source code hosted on </span>
+                    <FaGithubAlt />
+                    <a href="https://github.com/developercirclesaccra/rct-waptik-ClockDown" target="_blank">GitHub</a>
+                    </div>
+            </div>
 );
 
 Buttons.defaultProps = {
